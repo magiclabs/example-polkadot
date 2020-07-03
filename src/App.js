@@ -3,10 +3,10 @@ import "./styles.css";
 import { Magic } from "magic-sdk";
 import { PolkadotExtension } from "@magic-ext/polkadot";
 
-const magic = new Magic("pk_test_EDF0307A9991979E", {
+const magic = new Magic("pk_test_D8E8C3B1687997D7", {
   extensions: {
     polkadot: new PolkadotExtension({
-      rpcUrl: 'wss://kusama-rpc.polkadot.io/'
+      rpcUrl: 'ws://127.0.0.1:9944/'
     })
   }
 });
@@ -48,7 +48,7 @@ export default function App() {
 
     const tx = await magic.polkadot.sendTransaction(
         destinationAddress,
-        sendAmount,
+        parseInt(sendAmount) *  1000000000000000,
     );
 
     setSendingTransaction(false);
@@ -81,14 +81,9 @@ export default function App() {
             <button onClick={logout}>Logout</button>
           </div>
           <div className="container">
-            <h1>Zilliqa address</h1>
+            <h1>Polkadot address</h1>
             <div className="info">
-              <a
-                href={`https://viewblock.io/zilliqa/address/${publicAddress}?network=testnet`}
-                target="_blank"
-              >
                 {publicAddress}
-              </a>
             </div>
           </div>
           <div className="container">
@@ -97,12 +92,7 @@ export default function App() {
               <div>
                 <div>Send transaction success</div>
                 <div className="info">
-                  <a
-                    href={`https://viewblock.io/zilliqa/tx/${txHash}?network=testnet`}
-                    target="_blank"
-                  >
                     {txHash}
-                  </a>
                 </div>
               </div>
             ) : sendingTransaction ? (<div className="sending-status">
@@ -125,7 +115,7 @@ export default function App() {
               name="amount"
               className="full-width"
               required="required"
-              placeholder="Amount in Zil"
+              placeholder="Amount in UNIT"
               onChange={event => {
                 setSendAmount(event.target.value);
               }}
