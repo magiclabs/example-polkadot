@@ -1,1 +1,1 @@
-# exmple-polkadot
+# example-polkadot
