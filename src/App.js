@@ -6,7 +6,7 @@ import { PolkadotExtension } from "@magic-ext/polkadot";
 const magic = new Magic("pk_test_D8E8C3B1687997D7", {
   extensions: {
     polkadot: new PolkadotExtension({
-      rpcUrl: 'ws://127.0.0.1:9944/'
+      rpcUrl: 'wss://kusama-rpc.polkadot.io/'
     })
   }
 });
