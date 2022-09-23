@@ -3,12 +3,12 @@ import "./styles.css";
 import { Magic } from "magic-sdk";
 import { PolkadotExtension } from "@magic-ext/polkadot";
 
-const magic = new Magic("pk_live_06F1E4089E5D637F", {
+const magic = new Magic("pk_live_29C51111F2EC2403", {
   extensions: {
     polkadot: new PolkadotExtension({
-      rpcUrl: 'wss://kusama-rpc.polkadot.io/'
-    })
-  }
+      rpcUrl: "wss://kusama-rpc.polkadot.io/",
+    }),
+  },
 });
 
 export default function App() {
@@ -22,10 +22,10 @@ export default function App() {
   const [sendingTransaction, setSendingTransaction] = useState(false);
 
   useEffect(() => {
-    magic.user.isLoggedIn().then(async magicIsLoggedIn => {
+    magic.user.isLoggedIn().then(async (magicIsLoggedIn) => {
       setIsLoggedIn(magicIsLoggedIn);
       if (magicIsLoggedIn) {
-        const publicAddress = (await magic.polkadot.getAccount());
+        const publicAddress = await magic.polkadot.getAccount();
         setPublicAddress(publicAddress);
         setUserMetadata(await magic.user.getMetadata());
       }
@@ -43,19 +43,18 @@ export default function App() {
   };
 
   const handlerSendTransaction = async () => {
-
     setSendingTransaction(true);
 
     const tx = await magic.polkadot.sendTransaction(
-        destinationAddress,
-        parseInt(sendAmount) *  1000000000000000,
+      destinationAddress,
+      parseInt(sendAmount) * 1000000000000000
     );
 
     setSendingTransaction(false);
 
     setTxHash(tx);
 
-    console.log('send transaction', tx)
+    console.log("send transaction", tx);
   };
 
   return (
@@ -68,7 +67,7 @@ export default function App() {
             name="email"
             required="required"
             placeholder="Enter your email"
-            onChange={event => {
+            onChange={(event) => {
               setEmail(event.target.value);
             }}
           />
@@ -82,22 +81,18 @@ export default function App() {
           </div>
           <div className="container">
             <h1>Polkadot address</h1>
-            <div className="info">
-                {publicAddress}
-            </div>
+            <div className="info">{publicAddress}</div>
           </div>
           <div className="container">
             <h1>Send Transaction</h1>
             {txHash ? (
               <div>
                 <div>Send transaction success</div>
-                <div className="info">
-                    {txHash}
-                </div>
+                <div className="info">{txHash}</div>
               </div>
-            ) : sendingTransaction ? (<div className="sending-status">
-              Sending transaction
-            </div>) : (
+            ) : sendingTransaction ? (
+              <div className="sending-status">Sending transaction</div>
+            ) : (
               <div />
             )}
             <input
@@ -106,7 +101,7 @@ export default function App() {
               className="full-width"
               required="required"
               placeholder="Destination address"
-              onChange={event => {
+              onChange={(event) => {
                 setDestinationAddress(event.target.value);
               }}
             />
@@ -116,7 +111,7 @@ export default function App() {
               className="full-width"
               required="required"
               placeholder="Amount in UNIT"
-              onChange={event => {
+              onChange={(event) => {
                 setSendAmount(event.target.value);
               }}
             />
