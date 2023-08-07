@@ -97,7 +97,11 @@ export default function App() {
             {txHash ? (
               <div>
                 <div>Send transaction success</div>
-                <div className="info">{txHash}</div>
+                <div className="info">
+                  <a href={`https://rococo.subscan.io/extrinsic/${txHash}`} target="_blank" rel="noreferrer">
+                    {txHash}
+                  </a>
+                </div>
               </div>
             ) : sendingTransaction ? (
               <div className="sending-status">Sending transaction</div>
