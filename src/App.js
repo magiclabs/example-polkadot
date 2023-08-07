@@ -3,7 +3,7 @@ import "./styles.css";
 import { Magic } from "magic-sdk";
 import { PolkadotExtension } from "@magic-ext/polkadot";
 
-const magic = new Magic("pk_live_8D40A7E251F283ED", {
+const magic = new Magic("pk_live_29C51111F2EC2403", {
   extensions: {
     polkadot: new PolkadotExtension({
       rpcUrl: "wss://rococo-rpc.polkadot.io/",
