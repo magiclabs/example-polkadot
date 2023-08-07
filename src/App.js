@@ -81,7 +81,16 @@ export default function App() {
           </div>
           <div className="container">
             <h1>Polkadot address</h1>
-            <div className="info">{publicAddress}</div>
+            <div className="info">
+              <a href={`https://rococo.subscan.io/account/${publicAddress}`} target="_blank" rel="noreferrer">
+                {publicAddress}
+              </a>
+            </div>
+            <button>
+              <a href="https://paritytech.github.io/polkadot-testnet-faucet/" target="_blank" rel="noreferrer">
+                Faucet
+              </a>
+            </button>
           </div>
           <div className="container">
             <h1>Send Transaction</h1>
