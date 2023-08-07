@@ -6,7 +6,7 @@ import { PolkadotExtension } from "@magic-ext/polkadot";
 const magic = new Magic("pk_live_29C51111F2EC2403", {
   extensions: {
     polkadot: new PolkadotExtension({
-      rpcUrl: "wss://kusama-rpc.polkadot.io/",
+      rpcUrl: "wss://rococo-rpc.polkadot.io/",
     }),
   },
 });
@@ -33,7 +33,7 @@ export default function App() {
   }, [isLoggedIn]);
 
   const login = async () => {
-    await magic.auth.loginWithMagicLink({ email });
+    await magic.auth.loginWithEmailOTP({ email });
     setIsLoggedIn(true);
   };
 
@@ -81,14 +81,27 @@ export default function App() {
           </div>
           <div className="container">
             <h1>Polkadot address</h1>
-            <div className="info">{publicAddress}</div>
+            <div className="info">
+              <a href={`https://rococo.subscan.io/account/${publicAddress}`} target="_blank" rel="noreferrer">
+                {publicAddress}
+              </a>
+            </div>
+            <button>
+              <a href="https://paritytech.github.io/polkadot-testnet-faucet/" target="_blank" rel="noreferrer">
+                Faucet
+              </a>
+            </button>
           </div>
           <div className="container">
             <h1>Send Transaction</h1>
             {txHash ? (
               <div>
                 <div>Send transaction success</div>
-                <div className="info">{txHash}</div>
+                <div className="info">
+                  <a href={`https://rococo.subscan.io/extrinsic/${txHash}`} target="_blank" rel="noreferrer">
+                    {txHash}
+                  </a>
+                </div>
               </div>
             ) : sendingTransaction ? (
               <div className="sending-status">Sending transaction</div>
